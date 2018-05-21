@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Learn Android 5</string>
+    <string name="api_key">1104c0c1f961ded6c46eb0249c088cc4</string>
+    <string name="base_path_poster">https://image.tmdb.org/t/p/w500</string>
+</resources>
