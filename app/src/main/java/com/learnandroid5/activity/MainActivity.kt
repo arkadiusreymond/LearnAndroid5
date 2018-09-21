@@ -2,14 +2,12 @@ package com.learnandroid5.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import android.widget.Toast
-import com.bumptech.glide.Glide
 import com.learnandroid5.R
-import com.learnandroid5.adapter.MovieAdapter
-import com.learnandroid5.model.Movie
-import com.learnandroid5.model.MovieResponse
+import com.learnandroid5.adapter.PopularsTitleAdapter
+import com.learnandroid5.model.Populars
+import com.learnandroid5.model.PopularsV2
 import com.learnandroid5.service.ApiClient
 import com.learnandroid5.service.ApiInterface
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,67 +17,29 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
     private val TAG : String = MainActivity::class.java.canonicalName
-    private lateinit var movies : ArrayList<Movie>
+    private lateinit var populars : ArrayList<Populars>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
-
-        rvMovies.layoutManager = GridLayoutManager(applicationContext, 2)
-
-        val apiKey = getString(R.string.api_key)
+        rvPopularsTitle.layoutManager = LinearLayoutManager(applicationContext)
         val apiInterface : ApiInterface = ApiClient.getClient().create(ApiInterface::class.java)
-        getLatestMovie(apiInterface, apiKey)
-        getPopularMovies(apiInterface, apiKey)
-
-        collapseImage.setOnClickListener {
-            Toast.makeText(applicationContext, "Poster Gede", Toast.LENGTH_SHORT).show()
-        }
+        getPopularMovies(apiInterface)
     }
 
-    fun getPopularMovies(apiInterface: ApiInterface, apiKey : String) {
-        val call : Call<MovieResponse> = apiInterface.getPopularMovie(apiKey)
-        call.enqueue(object : Callback<MovieResponse> {
-            override fun onFailure(call: Call<MovieResponse>?, t: Throwable?) {
-                Log.d("$TAG", "Gagal Fetch Popular Movie")
+    fun getPopularMovies(apiInterface: ApiInterface) {
+        val call : Call<PopularsV2> = apiInterface.getPopularTitle()
+        call.enqueue(object : Callback<PopularsV2> {
+            override fun onFailure(call: Call<PopularsV2>?, t: Throwable?) {
+                Log.d("$TAG", "Gagal Fetch Popular Populars")
             }
 
-            override fun onResponse(call: Call<MovieResponse>?, response: Response<MovieResponse>?) {
-                movies = response!!.body()!!.results
-                Log.d("$TAG", "Movie size ${movies.size}")
-                rvMovies.adapter = MovieAdapter(movies)
+            override fun onResponse(call: Call<PopularsV2>?, response: Response<PopularsV2>?) {
+                populars = response!!.body()!!.populars
+                Log.d("$TAG", "Populars size ${populars.size}")
+                rvPopularsTitle.adapter = PopularsTitleAdapter(populars)
             }
 
         })
-    }
-
-    fun getLatestMovie(apiInterface: ApiInterface, apiKey : String) : Movie? {
-        var movie : Movie? = null
-        val call : Call<Movie> = apiInterface.getMovieLatest(apiKey)
-        call.enqueue(object : Callback<Movie> {
-            override fun onFailure(call: Call<Movie>?, t: Throwable?) {
-                Log.d("$TAG", "Gagal Fetch Popular Movie")
-            }
-
-            override fun onResponse(call: Call<Movie>?, response: Response<Movie>?) {
-                if (response != null) {
-                    var originalTitle : String? = response.body()?.originalTitle
-                    var posterPath : String? = response.body()?.posterPath
-
-                    collapseToolbar.title = originalTitle
-                    if (posterPath == null) {
-                        collapseImage.setImageResource(R.drawable.ic_launcher_background)
-                    } else {
-                        val imageUrl = StringBuilder()
-                        imageUrl.append(getString(R.string.base_path_poster)).append(posterPath)
-                        Glide.with(applicationContext).load(imageUrl.toString()).into(collapseImage)
-                    }
-                }
-            }
-
-        })
-
-        return movie
     }
 }

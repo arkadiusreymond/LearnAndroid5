@@ -1,14 +1,10 @@
 package com.learnandroid5.service
 
-import com.learnandroid5.model.Movie
-import com.learnandroid5.model.MovieResponse
+import com.learnandroid5.model.PopularsV2
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface ApiInterface {
-    @GET("movie/latest")
-    fun getMovieLatest(@Query("api_key") apiKey : String) : Call<Movie>
-    @GET("movie/popular")
-    fun getPopularMovie(@Query("api_key") apiKey: String) : Call<MovieResponse>
+    @GET("products/populars_v2.json")
+    fun getPopularTitle() : Call<PopularsV2>
 }
