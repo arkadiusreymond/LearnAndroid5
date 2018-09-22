@@ -40,7 +40,9 @@ class PopularSectionAdapter(val populars : ArrayList<Popular>, var context: Cont
 
         fun bind(popular: Popular, context: Context) {
             this.popular = popular
-            popularTitle.setText(popular.title)
+            //if(popular.title!=""&&popular.campign_id!=null){
+                popularTitle.setText(popular.title)
+            //}
             rvPopularProduct.layoutManager = LinearLayoutManager(context, OrientationHelper.HORIZONTAL, false)
             rvPopularProduct.adapter = PopularProductAdapter(popular.products)
         }

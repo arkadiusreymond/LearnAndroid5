@@ -9,4 +9,7 @@ class Product {
 
     @SerializedName("price")
     val price : String? = null
+
+    @SerializedName("images")
+    val smallImages : ArrayList<String> = ArrayList()
 }

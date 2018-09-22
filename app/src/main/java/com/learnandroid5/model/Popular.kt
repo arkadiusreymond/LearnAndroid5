@@ -12,4 +12,5 @@ class Popular{
 
     @SerializedName("products")
     val products : ArrayList<Product> = ArrayList()
+
 }
