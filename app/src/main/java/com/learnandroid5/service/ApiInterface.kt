@@ -6,5 +6,5 @@ import retrofit2.http.GET
 
 interface ApiInterface {
     @GET("products/populars_v2.json")
-    fun getPopularTitle() : Call<PopularResponse>
+    fun getPopular() : Call<PopularResponse>
 }
