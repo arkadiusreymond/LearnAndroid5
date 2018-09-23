@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="170dp"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="10dp">
+    android:layout_marginLeft="20dp">
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -13,23 +13,36 @@
             android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/image_product"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
+                android:layout_marginRight="20dp"
                 android:padding="1dp"
                 android:layout_height="150dp"
                 android:background="@drawable/image_border"/>
 
             <TextView
                 android:id="@+id/product_name"
-                android:layout_width="150dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/image_product"
                 android:text="tes"
+                android:layout_marginRight="20dp"
                 android:textColor="#333333"
                 android:ellipsize="end"
                 android:maxLines="2"
                 android:layout_marginTop="4dp"
                 android:textSize="14dp"
                 android:textStyle="normal" />
+            <TextView
+                android:id="@+id/product_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/product_name"
+                android:textColor="#333333"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:text="coba coba dulu"
+                android:maxLines="1"/>
         </RelativeLayout>
     </RelativeLayout>
 
