@@ -28,6 +28,7 @@ class PopularProductAdapter(val products : ArrayList<Product>) : RecyclerView.Ad
         private var view : View = itemView
         private var product : Product? = null
         var productName = view.findViewById(R.id.product_name) as TextView
+        var productPrice = view.findViewById<TextView>(R.id.product_price)
         var imageProduct = view.findViewById<ImageView>(R.id.image_product)
 
         override fun onClick(p0: View?) {
@@ -41,6 +42,7 @@ class PopularProductAdapter(val products : ArrayList<Product>) : RecyclerView.Ad
         fun bind(product: Product) {
             this.product = product
             productName.text = product.name
+            productPrice.text = product.price
 //            val imageUrl = StringBuilder()
 //            imageUrl.append(view.context.getString(R.string.base_path_poster)).append(popular.posterPath)
 //            Glide.with(view.context).load(imageUrl.toString()).into(view.mvPoster)
