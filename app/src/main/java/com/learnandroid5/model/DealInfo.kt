@@ -4,5 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 class DealInfo {
     @SerializedName("original_price")
-    val originalPrice : Int? = null
+    val originalPrice : Double? = null
+
+    @SerializedName("discount_price")
+    val discountPrice : Double? = null
 }

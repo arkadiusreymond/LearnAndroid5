@@ -1,6 +1,10 @@
 package com.learnandroid5.adapter
 
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.Typeface
 import android.support.v7.widget.RecyclerView
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +14,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.learnandroid5.R
 import com.learnandroid5.model.Product
+import com.learnandroid5.utils.Utils
 
 class PopularProductAdapter(val products : ArrayList<Product>) : RecyclerView.Adapter<PopularProductAdapter.ViewHolder>() {
 
@@ -28,7 +33,8 @@ class PopularProductAdapter(val products : ArrayList<Product>) : RecyclerView.Ad
         private var view : View = itemView
         private var product : Product? = null
         var productName = view.findViewById(R.id.product_name) as TextView
-        var productPrice = view.findViewById<TextView>(R.id.original_price)
+        var productOriginalPrice = view.findViewById<TextView>(R.id.original_price)
+        var productDiscountPrice = view.findViewById<TextView>(R.id.discount_price)
         var imageProduct = view.findViewById<ImageView>(R.id.image_product)
 
         override fun onClick(p0: View?) {
@@ -42,10 +48,27 @@ class PopularProductAdapter(val products : ArrayList<Product>) : RecyclerView.Ad
         fun bind(product: Product) {
             this.product = product
             productName.text = product.name
-            productPrice.text = product.price
-//            val imageUrl = StringBuilder()
-//            imageUrl.append(view.context.getString(R.string.base_path_poster)).append(popular.posterPath)
-//            Glide.with(view.context).load(imageUrl.toString()).into(view.mvPoster)
+            if(product.dealInfo!!.originalPrice==null){
+                productOriginalPrice.text = Utils.formatShortPrice(product.price)
+                productOriginalPrice.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16.0F)
+                productOriginalPrice.paintFlags = Paint.ANTI_ALIAS_FLAG
+                productOriginalPrice.typeface = Typeface.DEFAULT_BOLD
+                productOriginalPrice.setTextColor(Color.parseColor("#333333"))
+                productDiscountPrice.visibility = View.INVISIBLE
+                productDiscountPrice.text = ""
+            }
+            else {
+                productOriginalPrice.text = Utils.formatShortPrice(product.dealInfo.originalPrice)
+                productOriginalPrice.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 13.0F)
+                productOriginalPrice.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                productOriginalPrice.typeface = Typeface.DEFAULT
+                productOriginalPrice.setTextColor(Color.parseColor("#999999"))
+                productDiscountPrice.visibility = View.VISIBLE
+                productDiscountPrice.setTextColor(Color.parseColor("#D71149"))
+                productDiscountPrice.typeface = Typeface.DEFAULT_BOLD
+                productDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16.0F)
+                productDiscountPrice.text = Utils.formatShortPrice(product.dealInfo.discountPrice)
+            }
             Glide.with(view.context).load(product.smallImages.get(0).toString()).into(imageProduct)
         }
     }

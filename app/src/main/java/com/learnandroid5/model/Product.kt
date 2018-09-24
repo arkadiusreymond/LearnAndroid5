@@ -8,7 +8,7 @@ class Product {
     val name : String? = null
 
     @SerializedName("price")
-    val price : String? = null
+    val price : Double? = null
 
     @SerializedName("images")
     val smallImages : ArrayList<String> = ArrayList()
