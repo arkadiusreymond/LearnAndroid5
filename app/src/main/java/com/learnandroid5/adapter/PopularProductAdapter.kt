@@ -28,7 +28,7 @@ class PopularProductAdapter(val products : ArrayList<Product>) : RecyclerView.Ad
         private var view : View = itemView
         private var product : Product? = null
         var productName = view.findViewById(R.id.product_name) as TextView
-        var productPrice = view.findViewById<TextView>(R.id.product_price)
+        var productPrice = view.findViewById<TextView>(R.id.original_price)
         var imageProduct = view.findViewById<ImageView>(R.id.image_product)
 
         override fun onClick(p0: View?) {
