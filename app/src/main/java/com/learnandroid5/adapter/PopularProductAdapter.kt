@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
@@ -36,6 +37,10 @@ class PopularProductAdapter(val products : ArrayList<Product>) : RecyclerView.Ad
         var productOriginalPrice = view.findViewById<TextView>(R.id.original_price)
         var productDiscountPrice = view.findViewById<TextView>(R.id.discount_price)
         var imageProduct = view.findViewById<ImageView>(R.id.image_product)
+        var persentageDiscount = view.findViewById<TextView>(R.id.percantage_discount)
+        var productRatingBar = view.findViewById<RatingBar>(R.id.rating)
+        var productUserCount = view.findViewById<TextView>(R.id.user_count)
+
 
         override fun onClick(p0: View?) {
             Toast.makeText(view.context, "Item diklik", Toast.LENGTH_LONG).show()
@@ -48,6 +53,10 @@ class PopularProductAdapter(val products : ArrayList<Product>) : RecyclerView.Ad
         fun bind(product: Product) {
             this.product = product
             productName.text = product.name
+            persentageDiscount.bringToFront()
+            productRatingBar.rating = product.rating?.averageRate!!
+            productUserCount.text = "(" + product.rating.userCount.toString()+")"
+
             if(product.dealInfo!!.originalPrice==null){
                 productOriginalPrice.text = Utils.formatShortPrice(product.price)
                 productOriginalPrice.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16.0F)
@@ -56,6 +65,7 @@ class PopularProductAdapter(val products : ArrayList<Product>) : RecyclerView.Ad
                 productOriginalPrice.setTextColor(Color.parseColor("#333333"))
                 productDiscountPrice.visibility = View.INVISIBLE
                 productDiscountPrice.text = ""
+                persentageDiscount.visibility = View.INVISIBLE
             }
             else {
                 productOriginalPrice.text = Utils.formatShortPrice(product.dealInfo.originalPrice)
@@ -68,6 +78,8 @@ class PopularProductAdapter(val products : ArrayList<Product>) : RecyclerView.Ad
                 productDiscountPrice.typeface = Typeface.DEFAULT_BOLD
                 productDiscountPrice.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16.0F)
                 productDiscountPrice.text = Utils.formatShortPrice(product.dealInfo.discountPrice)
+                persentageDiscount.visibility = View.VISIBLE
+                persentageDiscount.text = product.dealInfo.percentageDiscount.toString()+"%"
             }
             Glide.with(view.context).load(product.smallImages.get(0).toString()).into(imageProduct)
         }

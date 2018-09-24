@@ -15,4 +15,7 @@ class Product {
 
     @SerializedName("deal_info")
     val dealInfo : DealInfo? = null
+
+    @SerializedName("rating")
+    val rating : Rating? = null
 }

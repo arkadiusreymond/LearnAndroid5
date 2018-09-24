@@ -8,4 +8,7 @@ class DealInfo {
 
     @SerializedName("discount_price")
     val discountPrice : Double? = null
+
+    @SerializedName("discount_percentage")
+    val percentageDiscount : Int? = null
 }
