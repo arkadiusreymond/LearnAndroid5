@@ -12,4 +12,7 @@ class Product {
 
     @SerializedName("images")
     val smallImages : ArrayList<String> = ArrayList()
+
+    @SerializedName("deal_info")
+    val dealInfo : DealInfo? = null
 }
