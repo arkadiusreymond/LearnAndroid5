@@ -36,7 +36,7 @@ class PopularProductAdapter(val products : ArrayList<Product>) : RecyclerView.Ad
         var productName = view.findViewById(R.id.product_name) as TextView
         var productOriginalPrice = view.findViewById<TextView>(R.id.original_price)
         var productDiscountPrice = view.findViewById<TextView>(R.id.discount_price)
-        var imageProduct = view.findViewById<ImageView>(R.id.image_product)
+        var imageProduct = view.findViewById<ImageView>(R.id.image_promo_banner)
         var persentageDiscount = view.findViewById<TextView>(R.id.percantage_discount)
         var productRatingBar = view.findViewById<RatingBar>(R.id.rating)
         var productUserCount = view.findViewById<TextView>(R.id.user_count)

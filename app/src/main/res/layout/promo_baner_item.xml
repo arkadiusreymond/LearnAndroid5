@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="20dp">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/promo_due"
+                android:layout_width="80dp"
+                android:textSize="12dp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/rounded_corner"
+                android:layout_height="wrap_content"
+                android:text="6 Hari lagi">
+            </TextView>
+            <ImageView
+                android:id="@+id/image_promo_banner"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@drawable/image_border"
+                android:padding="1dp" />
+            <TextView
+                android:id="@+id/description_promo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_promo_banner"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="tes"
+                android:textColor="#333333"
+                android:textSize="14dp"
+                android:textStyle="normal" />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</android.support.constraint.ConstraintLayout>
